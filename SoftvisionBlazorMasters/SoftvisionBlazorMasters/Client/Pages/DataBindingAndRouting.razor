@@ -1,0 +1,72 @@
+﻿@page "/data-binding-and-routing"
+
+<style>
+    .dark-theme {
+        background-color: black;
+        color: white;
+    }
+
+</style>
+
+<div>
+    <h2>Data Binding and Routing</h2>
+    @*<InputCheckbox @bind-Value="isDarkMode">Mode: Dark Mode</InputCheckbox>*@
+    
+    <div class=@(isDarkMode ? "dark-theme" : "")>
+        <form>
+            <div class="labeled-input">
+                <input name="chk-dark-theme" type="checkbox" @bind="isDarkMode" />
+                <label for="chk-dark-theme">Mode: @(isDarkMode ? "Dark" : "Light" ) Mode</label>
+            </div>
+            <div class="labeled-input">
+                <label for="count-start-input">Count Down From: </label>
+                <input name="count-start-input" type="number" @bind="countStart" />
+            </div>
+            <div class="labeled-input">
+                <label for="count-end-input">Count Down Until: </label>
+                <input name="count-end-input" type="number" @bind="countEnd" />
+            </div>
+        </form>
+        <div>Counter: @currentCount</div>
+        <button @onclick="OnStartClickHandler">Start</button>
+        <div>Count Down From: @countStart</div>
+        <div>Count Down Until: @countEnd</div>
+    </div>
+    
+</div>
+
+@code {
+    private bool isDarkMode = false;
+    private int countStart = 0;
+    private int countEnd = 0;
+    private int currentCount = 0;
+    private string themeColor;
+    private static System.Timers.Timer aTimer;
+
+    private void OnDarkModeToggleHandler()
+    {
+        isDarkMode = !isDarkMode;
+        themeColor = isDarkMode ? "black" : "white";
+    }
+
+    private async Task OnStartClickHandler()
+    {
+        currentCount = countStart;
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;
+    }
+    
+    private void CountDownTimer(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        if (currentCount > countEnd)
+        {
+            currentCount -= 1;
+        }
+        else
+        {
+            aTimer.Enabled = false;
+        }
+        InvokeAsync(StateHasChanged);
+    }
+}
