@@ -1,1 +1,1 @@
-# BlazerMasterClass
+# BlazorMasterClass
