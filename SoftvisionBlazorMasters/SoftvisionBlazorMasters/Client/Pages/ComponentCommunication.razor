@@ -1,0 +1,27 @@
+﻿@page "/component-communication"
+@using SoftvisionBlazorMasters.Client.Pages.Components
+
+<h3>Employee List</h3>
+
+<div>
+    <div>
+        Selection Count: @selectionCount
+    </div>
+    @foreach (var employee in employees)
+    {
+        <EmployeeCard OnSelectionChange="OnEmployeeClickHanlder" Name=@employee />
+    }
+</div>
+
+@code {
+    private List<string> employees { get; set; } = new() { "Norben", "Von", "Reyn", "John", "Doe" };
+
+    //private List<string> employeesChecked { get; set; } = new();
+
+    private int selectionCount { get; set; } = 0;
+
+    private void OnEmployeeClickHanlder(bool isSelected)
+    {
+        selectionCount += isSelected ? 1 : -1; 
+    }
+}

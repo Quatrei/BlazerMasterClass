@@ -1,9 +1,73 @@
 ﻿@page "/"
+@using SoftvisionBlazorMasters.Client.Models
+@inject NavigationManager NavigationManager
 
-<PageTitle>Index</PageTitle>
+<style>
+    table {
+        border: 1px solid black;
+    }
 
-<h1>Hello, world!</h1>
+    thead {
+        background-color: green;
+        color: white
+    }
+</style>
 
-Welcome to your new app.
+<PageTitle>Blazor Masters</PageTitle>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h1>Blazor Masters</h1>
+<h2>Assignments</h2>
+
+@*<SurveyPrompt Title="How is Blazor working for you?" />
+*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Date Submitted</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignment in assignments)
+        {
+            <tr>
+                <td>@assignment.Id</td>
+                <td>@assignment.Name</td>
+                <td>@assignment.DateSubmitted.ToShortDateString()</td>
+                <td>
+                    <button @onclick="() => OnNavigateClickHandler(assignment.Route)">Navigate</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Assignment>? assignments;
+
+    protected override async Task OnInitializedAsync()
+    {
+        assignments = new List<Assignment>{
+            new Assignment
+            {
+                Id=1,
+                Name="Data Binding and Routing",
+                DateSubmitted=DateTime.Now,
+                Route="/data-binding-and-routing"
+            },
+            new Assignment
+            {
+                Id=2,
+                Name="Component Communication",
+                DateSubmitted=DateTime.Now,
+                Route="/component-communication"
+            }
+        };
+    }
+
+    public void OnNavigateClickHandler (string route) {
+        NavigationManager.NavigateTo(route);
+    }
+}

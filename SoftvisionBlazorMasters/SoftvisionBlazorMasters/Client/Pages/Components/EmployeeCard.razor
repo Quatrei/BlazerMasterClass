@@ -1,0 +1,29 @@
+﻿<style>
+    .multi-select-item {
+        width: 100%;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 2px
+    }
+</style>
+
+<div class="multi-select-item">
+    <input name="chk-dark-theme" type="checkbox" @oninput="CheckboxChanged" />
+    <label for="chk-dark-theme">@Name</label>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnSelectionChange { get; set; }
+
+    private void CheckboxChanged(ChangeEventArgs e)
+    {
+        var value = (bool)e.Value;
+        OnSelectionChange.InvokeAsync(value);
+    }
+
+}
