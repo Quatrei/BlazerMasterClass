@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "e3ed69fb-88a7-4aa6-a303-eb38e37763cd",
+		"name": "CovacRegistration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12205091"
+	},
+	"item": [
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "Get Registrations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations"
+							],
+							"query": [
+								{
+									"key": "currentPage",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "statusId",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Registrations Approved",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations?isApproved=true",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations"
+							],
+							"query": [
+								{
+									"key": "currentPage",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "statusId",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "isApproved",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Registrations Pending",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations?isApproved=false",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations"
+							],
+							"query": [
+								{
+									"key": "currentPage",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "statusId",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "isApproved",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Registrations by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations/{{RegistrationId}}",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations",
+								"{{RegistrationId}}"
+							],
+							"query": [
+								{
+									"key": "currentPage",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "statusId",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"RegistrationId\", response.registrationId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Norben\",\r\n    \"middleName\": \"Ramirez\",\r\n    \"lastName\": \"Oriarte\",\r\n    \"email\": \"norben.oriarte@softvision.com\",\r\n    \"gender\": 1,\r\n    \"contactNumber\": \"123\",\r\n    \"idPresented\": \"SSS\",\r\n    \"idNumber\": \"321\",\r\n    \"priority\": 2,\r\n    \"address\": {\r\n        \"city\": \"taguig\",\r\n        \"barangay\": \"lower bicutan\",\r\n        \"street\": \"viscarra street\"\r\n    },\r\n    \"registrationStatus\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Registration",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"registrationId\": {{RegistrationId}},\r\n    \"firstName\": \"Von\",\r\n    \"middleName\": \"Adrian\",\r\n    \"lastName\": \"Uson\",\r\n    \"email\": \"von.uson@softvision.com\",\r\n    \"gender\": 0,\r\n    \"contactNumber\": \"1234565\",\r\n    \"idPresented\": \"Passport\",\r\n    \"idNumber\": \"PH-12345\",\r\n    \"priority\": 2,\r\n    \"address\": {\r\n        \"city\": \"Manila\",\r\n        \"barangay\": \"Paco\",\r\n        \"street\": \"street\"\r\n    },\r\n    \"RegistrationStatus\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Registration Approved",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "3",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations/{{RegistrationId}}/RegistrationStatus",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations",
+								"{{RegistrationId}}",
+								"RegistrationStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Registration Denied",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations/{{RegistrationId}}/RegistrationStatus",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations",
+								"{{RegistrationId}}",
+								"RegistrationStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vaccination Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"VaccinationProfileId\", response.vaccinationProfileId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations/{{RegistrationId}}/VaccinationProfile",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations",
+								"{{RegistrationId}}",
+								"VaccinationProfile"
+							],
+							"query": [
+								{
+									"key": "currentPage",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "statusId",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schedule",
+			"item": [
+				{
+					"name": "Book Schedule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"ScheduleId\", response.scheduleId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"venue\": \"string\",\r\n    \"scheduleDate\": \"2022-06-30T23:59:21.441Z\",\r\n    \"vaccinationProfileId\": \"{{VaccinationProfileId}}\",\r\n    \"vaccineId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Schedules",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Schedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Schedule Show",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Schedules/{{ScheduleId}}/ScheduleStatus",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Schedules",
+								"{{ScheduleId}}",
+								"ScheduleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Schedule No Show",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "3",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7173/api/Schedules/{{ScheduleId}}/ScheduleStatus",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Schedules",
+								"{{ScheduleId}}",
+								"ScheduleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending Vaccination Profiles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Registrations/VaccinationProfiles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Registrations",
+								"VaccinationProfiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Schedule By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7173/api/Schedules/{{ScheduleId}}",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7173",
+							"path": [
+								"api",
+								"Schedules",
+								"{{ScheduleId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "RegistrationId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "VaccinationProfileId",
+			"value": "1"
+		},
+		{
+			"key": "ScheduleId",
+			"value": ""
+		}
+	]
+}
